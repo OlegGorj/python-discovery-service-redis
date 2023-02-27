@@ -2,7 +2,7 @@
 
 
 This little piece of code uses the Redis Cache Python client library to interact with Azure Redis.
-The code uses `azure-mgmt-redis` package https://pypi.org/project/azure-mgmt-redis/.
+The code uses `redis-py` package https://docs.redis.com/latest/rs/references/client_references/client_python/.
 The Redis client object is created using the connection details, including the Redis host, access key, and SSL configuration.
 
 This code uses the Azure Identity library to authenticate with Azure and obtain the credentials needed to interact with the Azure Redis service.
@@ -25,7 +25,5 @@ This ensures that the Redis channel is available for publishers and subscribers 
 [TODO] add requirements file
 
 Manual deployment procedure can be found here: https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-python-get-started
-
-There is another python redis package that might be worth trying, `redis-py` package https://github.com/redis/redis-py.
 
 One more reference, example from Azure team how to use Redis Management API https://learn.microsoft.com/en-us/python/api/overview/azure/cache-for-redis?view=azure-python
