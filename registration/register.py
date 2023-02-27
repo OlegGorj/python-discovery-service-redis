@@ -1,10 +1,16 @@
 import os
 import time
+from azure.identity import DefaultAzureCredential
+from azure.mgmt.redis import RedisManagementClient
 from azure.redis import RedisClient
 
-# Azure Redis connection details
-REDIS_HOST = os.environ['REDIS_HOST']
-REDIS_KEY = os.environ['REDIS_KEY']
+# Azure authentication details
+CREDENTIALS = DefaultAzureCredential()
+
+# Azure Redis details
+SUBSCRIPTION_ID = os.environ['SUBSCRIPTION_ID']
+RESOURCE_GROUP = os.environ['RESOURCE_GROUP']
+REDIS_NAME = os.environ['REDIS_NAME']
 REDIS_CHANNEL = 'service_discovery_channel'
 
 # Channel name
@@ -16,7 +22,11 @@ SERVICE_HOST = 'localhost'
 SERVICE_PORT = 8000
 
 # Redis client object
-redis_client = RedisClient(host=REDIS_HOST, port=6380, password=REDIS_KEY, ssl=True)
+redis_client = RedisClient(host=REDIS_NAME + '.redis.cache.windows.net', password=None, ssl=True)
+
+# Redis management client object
+redis_mgmt_client = RedisManagementClient(CREDENTIALS, SUBSCRIPTION_ID)
+
 
 def check_and_create_channel(channel_name):
     """
@@ -27,6 +37,7 @@ def check_and_create_channel(channel_name):
     else:
         redis_client.execute_command('PUBLISH', channel_name, 'Channel created.')
         print(f"Redis channel '{channel_name}' created.")
+
 
 def register_service():
     """
@@ -41,9 +52,9 @@ def register_service():
             print('Redis connection error, retrying in 5 seconds...')
             time.sleep(5)
 
+
 # Check if the Redis channel exists and create it if it doesn't
 check_and_create_channel(CHANNEL_NAME)
 
 # Register the service for discovery
 register_service()
-
