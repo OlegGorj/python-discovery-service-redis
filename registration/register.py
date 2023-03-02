@@ -18,7 +18,6 @@ SERVICE_PORT = 8000
 # Redis client object
 redis_client = redis.Redis(host=REDIS_HOST, port=6380, password=REDIS_KEY, ssl=True)
 
-
 def check_and_create_channel(channel_name):
     """
     Checks if the specified Redis channel exists, and creates it if it doesn't.
