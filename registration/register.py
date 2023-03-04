@@ -18,14 +18,17 @@ SERVICE_PORT = 8000
 # Redis client object
 redis_client = redis.Redis(host=REDIS_HOST, port=6380, password=REDIS_KEY, ssl=True)
 
+
 def check_and_create_channel(channel_name):
     """
     Checks if the specified Redis channel exists, and creates it if it doesn't.
     """
+    # TODO: use pubsub_channels function to check if teh channel exist
+
     if redis_client.exists(channel_name):
         print(f"Redis channel '{channel_name}' already exists.")
     else:
-        redis_client.execute_command('PUBLISH', channel_name, 'Channel created.')
+        redis_client.publish( channel_name, 'Channel created.')
         print(f"Redis channel '{channel_name}' created.")
 
 
