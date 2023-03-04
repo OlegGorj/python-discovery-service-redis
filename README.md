@@ -54,3 +54,35 @@ Redis Pub/Sub also has a lower latency than HashTable, since it doesn't involve 
 
 Anyways, while it is technically possible to use Azure Redis HashTable for service discovery in Python, it seems like using Redis Pub/Sub is a better option due to its native support for messaging and scalability.
 Redis Pub/Sub provides a reliable and efficient way to implement service discovery, and it is a good fit for building scalable and fault-tolerant microservice architectures.
+
+
+## Options assessment to implement service discovery using Redis as backend 
+
+Redis provides several options to implement service discovery, including:
+
+- Redis Strings: Redis Strings are the most basic data type in Redis, and can be used to store any type of data, including serialized data like JSON or pickled Python objects. 
+Redis Strings support atomic operations like incrementing or decrementing numerical values, which can be used to implement simple state management. 
+- For more information on using Redis Strings for service discovery, you can refer to the Redis documentation at https://redis.io/commands#string.
+
+- Redis Hashes: Redis Hashes are a more advanced data type in Redis, and can be used to store structured data like Python dictionaries or JSON objects.
+Redis Hashes support atomic operations on individual fields, which can be used to implement more complex state management, such as tracking the state of a user's session or the progress of a task.
+- For more information on using Redis Hashes, you can refer to the Redis documentation at https://redis.io/commands#hash.
+
+- Redis Sets: Redis Sets are another data type in Redis that can be used for service discovery. 
+Redis Sets store unordered collections of unique values, and support operations like adding or removing elements and performing set operations like union or intersection.
+Redis Sets can be used to implement state management for things like user permissions or tracking which items have been processed in a queue.
+For more information on using Redis Sets, you can refer to the Redis documentation at https://redis.io/commands#set.
+
+- Redis Sorted Sets: Redis Sorted Sets are similar to Redis Sets, but also maintain a score for each element, which can be used to sort the elements in the set.
+Redis Sorted Sets support the same operations as Redis Sets, as well as operations like retrieving elements by score range or ranking.
+Redis Sorted Sets can be used to implement state management for things like leaderboard rankings or scheduling tasks based on priority.
+For more information on using Redis Sorted Sets, you can refer to the Redis documentation at https://redis.io/commands#sorted_set.
+
+- Redis Pub/Sub: Redis Pub/Sub is a messaging system in Redis that allows different parts of an application to communicate with each other using channels.
+Redis Pub/Sub can be used to implement state management for real-time applications or event-driven architectures.
+
+
+So.. evidently Redis provides several options for implementing state management, from basic key-value storage using Redis Strings to more advanced data structures like Redis Hashes and Sorted Sets.
+The choice of data structure and method of implementation will depend on the specific requirements of your application.
+
+
