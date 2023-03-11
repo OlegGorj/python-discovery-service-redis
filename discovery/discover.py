@@ -8,10 +8,6 @@ REDIS_KEY = os.environ['REDIS_KEY']
 # Channel name
 CHANNEL_NAME = 'my_channel'
 
-# Service details
-SERVICE_NAME = 'my_service'     # change to env var
-SERVICE_HOST = 'localhost'      # change to env var -- actual host
-SERVICE_PORT = 8000             # change to env var -- 6380
 
 # TODO implement frm_url method
 
