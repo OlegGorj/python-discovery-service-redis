@@ -32,14 +32,14 @@ def check_and_create_channel(channel_name):
         print(f"Redis channel '{channel_name}' created.")
 
 
-def register_service():
+def publish_service(channel_name):
     """
     Registers the service by publishing its details to the Redis channel.
     """
     service_data = {'name': SERVICE_NAME, 'host': SERVICE_HOST, 'port': SERVICE_PORT}
     while True:
         try:
-            redis_client.publish(REDIS_CHANNEL, str(service_data))
+            redis_client.publish(channel_name, str(service_data))
             break
         except redis.ConnectionError:
             print('Redis connection error, retrying in 5 seconds...')
@@ -50,4 +50,4 @@ def register_service():
 check_and_create_channel(CHANNEL_NAME)
 
 # Register the service for discovery
-register_service()
+publish_service(CHANNEL_NAME)
